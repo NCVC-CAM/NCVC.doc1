@@ -1,0 +1,45 @@
+\documentclass[a4paper]{ujarticle}
+
+\usepackage{mymacro}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{xcolor}
+\usepackage{here} % \begin{figure}[H]
+\usepackage{ascmac} % \boxnote　ほか
+\usepackage{listings, jlisting}
+%% -- \url link
+\usepackage[linkcolor=black]{hyperref}
+\usepackage[hyperrefcolorlinks,os=win]{menukeys}
+\usepackage{pxjahyper}
+%% --
+\lstset{language=c,
+  breaklines = true,
+  linewidth=\textwidth,
+  xleftmargin=20pt,
+  xrightmargin=20pt,
+  basicstyle={\footnotesize\ttfamily},
+  identifierstyle={\footnotesize\ttfamily},
+  commentstyle={\footnotesize\ttfamily},
+  keywordstyle={\footnotesize\ttfamily},
+  ndkeywordstyle={\footnotesize\ttfamily},
+  stringstyle={\footnotesize\ttfamily},
+  classoffset=1,
+  frame=tRBl,
+  framesep=5pt,
+  showstringspaces=false,
+  numbers=left,
+  stepnumber=1,
+  tabsize=4
+}
+%%
+\begin{document}
+
+\thispagestyle{empty}
+\input{./part00.tex}
+\newpage
+
+\input{initial.sty}
+\input{No1/part10.tex}
+\newpage
+
+\end{document}
