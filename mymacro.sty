@@ -36,6 +36,10 @@
  \parsep \z@%%                     2pt plus 1pt minus 1pt
  \itemsep =0pt plus 1pt\relax}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 脚注を＊付きに
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{*\arabic{footnote}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % section にアンダーライン
@@ -46,7 +50,7 @@
     \protect\numberline{\thesection}#1}%
   \par\vspace{4zh}{\Large\bf%
     \noindent{}\arabic{section}.\hspace{1zw}#1}\\[-1zh]%
-    \rule{\textwidth}{1pt}\par\vspace{-2zh}}%
+    \rule{\textwidth}{1pt}\par\vspace{-1zh}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ボールドイタリックにするコマンド
