@@ -225,3 +225,55 @@ M30
 \caption{カスタムファイルのエラーメッセージ}
 \label{fig:error.png}
 \end{figure}
+
+\subsection{Gコードの加工シミュレーション}
+
+\subsubsection{加工時間の表示}
+
+\begin{minipage}[t]{0.5\textwidth}
+　図\ref{fig:sim.png} の左上に注目して下さい．
+［トータル加工時間］が表示されていますが，初期設定の段階では表示されません．
+G01～G03（直線補間や円弧補間）等の加工時間はFパラメータとその移動距離から算出できますが，
+G00早送りの移動速度は工作機械固有のパラメータです．
+これをNCVCに設定することで，加工時間が算出されます．
+
+　\menu{オプション>工作機械の設定} をクリックし機械情報ファイル（mncファイル）を選択すると図\ref{fig:kikai.png} のダイアログが表示されますので，
+［位置決め(G0)移動速度］に工作機械の早送り移動速度を設定して下さい．
+ここが空白の場合，加工時間は表示されません．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No2/fig/kikai.png}
+\caption{機械情報の設定}
+\label{fig:kikai.png}
+\end{figure}
+\end{minipage}
+
+\vspace*{2zh}
+　この設定も工作機械ごとに用意しましょう．
+現在選択されている機械情報ファイルはツールバーに表示されます（図\ref{fig:select.png}）．
+加工時間は機械情報ファイルを切り換えるたびに再計算されます．
+
+\begin{figure}[H]
+\centering
+\includegraphics{No2/fig/select.png}
+\caption{機械情報ツールバー}
+\label{fig:select.png}
+\end{figure}
+
+\subsubsection{トレース}
+
+　図\ref{fig:trace.png} はトレースのツールバーです．
+とりあえずトレース速度を中速（右から２番目）にしてトレース実行（一番左）を押してみましょう．
+どういう手順で加工されていくかを見ることができます．
+トレースのスピード調整はリファレンスの表示属性を参照してください．
+その他の操作については解説するまでもなく使えると思います．
+
+\begin{figure}[H]
+\centering
+\includegraphics{No2/fig/trace.png}
+\caption{トレースツールバー}
+\label{fig:trace.png}
+\end{figure}
