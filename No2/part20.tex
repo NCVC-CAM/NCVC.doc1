@@ -3,6 +3,7 @@
 \mysection{基本編}
 
 \subsection{CADでの作図}
+\label{DesignCAD}
 
 \begin{minipage}[t]{0.4\textwidth}
 　まずは基本的な加工を行うための基本的な作図方法を解説します．
@@ -58,6 +59,7 @@ NCVCにCADデータを読み込ませるためDXF形式で保存する必要が�
 使用しているCAD独自の形式でも保存しておきましょう．
 
 \subsection{CADデータの読み込み}
+\label{sec:ReadCAD}
 
 \begin{minipage}[t]{0.5\textwidth}
 　NCVCでDXF形式のCADデータを読み込みます．
@@ -91,6 +93,7 @@ CADでの線種・線色は無視され，NCVCの設定に基づき表示され�
 \end{figure}
 
 \subsection{加工条件の設定}
+\label{sec:init.nci}
 
 　いよいよCADデータからGコードを生成するわけですが，ご覧の通り読み込んだCADデータは２次元です．
 工作機械のZ軸方向の移動はどうやって制御するのでしょうか？
@@ -137,6 +140,7 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \end{minipage}
 
 \subsection{Gコードの生成}
+\label{sec:MakeGcode}
 
 \begin{minipage}[t]{0.5\textwidth}
 　加工条件の設定ができればあとはNCVCの仕事．
@@ -276,4 +280,66 @@ G00早送りの移動速度は工作機械固有のパラメータです．
 \includegraphics{No2/fig/trace.png}
 \caption{トレースツールバー}
 \label{fig:trace.png}
+\end{figure}
+
+\subsection{穴加工}
+
+　基本編の最後として，固定サイクルでの穴加工データの生成を解説します．
+作図レイヤは【\ref{sec:ReadCAD} CADデータの読み込み】と同じで，切削レイヤに穴加工情報を作図します．
+
+　図\ref{fig:sample2.pdf} は矩形の四隅と中央に穴加工を行うための作図データです．
+穴加工を行いたい場所を中心に，四隅には半径3mmの円，中央には半径5mmの円を作図しています．
+今回はXY原点を示す原点レイヤは作図していません．
+
+　工作機械のXY原点がワークの中央に位置し，CADデータ上でも最大占有領域の中央が原点で良い場合，NCVCがXY原点を補間する機能があります．
+
+\begin{figure}[H]
+\centering
+\includegraphics{No2/fig/sample2.pdf}
+\caption{穴加工サンプル図形}
+\label{fig:sample2.pdf}
+\end{figure}
+
+　図\ref{fig:NCVCsetup.png}（p.\pageref{fig:NCVCsetup.png}）の読み込みレイヤ設定と違うのは，［原点データがないとき］の選択肢．
+これをエラー以外に設定しておけば，NCVCがXY原点を補間します（図\ref{fig:NCVCsetup2.png}）．
+
+　ただし，補間はCADデータの最大占有領域から算出されますので，意図しない位置に原点が補間される場合があります．
+特別な場合を除き【\ref{DesignCAD} CADでの作図】の通り原点情報を作図することを推奨します．
+
+　穴加工に関する加工条件は【\ref{sec:init.nci} 加工条件の設定】で解説した条件ファイルの［穴加工］タブにて行います（図\ref{fig:hole.png}）．
+主軸回転数や切削送りなど，穴加工独自に指定可能です．
+ここで注目すべき所は［拡張設定グループ］の各種項目．
+［円データも穴加工データと見なす］にチェックを入れ，対象となる半径を入力することで，その中心座標に穴加工データを生成します．
+従来，穴加工の入力源は点データでしたが，イメージがつかみにくい，点データをDXFに吐けないCADがある等の理由から，
+円データでの穴加工が拡張設定となっています．
+
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{No2/fig/NCVCsetup2.png}
+\caption{読み込みレイヤ設定2}
+\label{fig:NCVCsetup2.png}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No2/fig/hole.png}
+\caption{穴加工の加工条件設定}
+\label{fig:hole.png}
+\end{figure}
+\end{minipage}
+
+\vspace*{2zh}
+　加工条件が設定できればあとは【\ref{sec:MakeGcode} Ｇコードの生成】通りです．
+図\ref{fig:simhole.png} にシミュレーション結果を示します．
+加工条件の［グルーピング順序］を［降順］にすることで半径の大きい中央から固定サイクル命令が生成されています．
+また，［大きさごとにコメントを埋め込む］にチェックを入ることで，それぞれの半径ごとにNCVCがコメントを埋め込みますので，
+手作業での修正，例えば工具交換命令を埋め込む等，編集の目安となります．
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{No2/fig/simuhole.png}
+\caption{穴加工のシミュレーション画面}
+\label{fig:simhole.png}
 \end{figure}

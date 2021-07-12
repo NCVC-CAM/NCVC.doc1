@@ -1,0 +1,18 @@
+%
+G90G92X0Y0Z10.
+S5000M03
+(Layer="CAM_LINE" start)
+(R5.000 start)
+G99G82Z-30.R1.P10F60.
+(R3.000 start)
+X45.Y-20.
+Y20.
+X-45.
+Y-20.
+(End of CircleData)
+G80
+G00Z10.
+M05
+X0Y0
+M30
+%
