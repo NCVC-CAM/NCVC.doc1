@@ -32,6 +32,23 @@
   tabsize=4
 }
 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 図番号，表番号を章番号付きで
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\makeatletter
+\@addtoreset{equation}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+% listings用の設定
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+\makeatother
+
 \begin{document}
 
 \thispagestyle{empty}
@@ -47,6 +64,10 @@
 \newpage
 
 \input{No2/part20.tex}
+\newpage
+
+\input{initial.sty}
+\input{No3/part30.tex}
 \newpage
 
 \end{document}

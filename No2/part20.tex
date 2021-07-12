@@ -67,11 +67,11 @@ NCVCにCADデータを読み込ませるためDXF形式で保存する必要が�
 NCVCの \menu{オプション>DXF関連の設定} をクリックし，
 NCVCが読み込むレイヤ名を設定して下さい．
 デフォルトで先ほど設定した値になっていると思います．
-基本編では［従来互換］のみ解説しますので，図\ref{fig:NCVCsetup.png} の通り設定して下さい．
+基本編では［従来互換］のみ解説しますので，図\ref{fig:ReadSetup.png} の通り設定して下さい．
 この値は任意です．CAD側の設定と合わせて下さい．
 無事読み込めると原点を示す十字（大きさは原点円の直径）と切削対象のパスが表示されます．
 原点レイヤと切削レイヤ以外に作図した情報，
-例えば，図\ref{fig:sampleLayer.png} の4番レイヤに書いたワークを表す矩形は読み込まれません（図\ref{fig:NCVCread.png}）．
+例えば，図\ref{fig:sampleLayer.png} の4番レイヤに書いたワークを表す矩形は読み込まれません（図\ref{fig:ReadJWW.png}）．
 CADでの線種・線色は無視され，NCVCの設定に基づき表示されます．
 詳細はリファレンスの表示属性を参照してください．
 \end{minipage}
@@ -79,17 +79,17 @@ CADでの線種・線色は無視され，NCVCの設定に基づき表示され�
 \vspace*{-2zh}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{No2/fig/NCVCsetup.png}
+\includegraphics[scale=0.7]{No2/fig/ReadSetup.png}
 \caption{読み込みレイヤ設定}
-\label{fig:NCVCsetup.png}
+\label{fig:ReadSetup.png}
 \end{figure}
 \end{minipage}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{No2/fig/NCVCread.png}
+\includegraphics[scale=0.55]{No2/fig/ReadJWW.png}
 \caption{CADデータの読み込み}
-\label{fig:NCVCread.png}
+\label{fig:ReadJWW.png}
 \end{figure}
 
 \subsection{加工条件の設定}
@@ -145,7 +145,7 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \begin{minipage}[t]{0.5\textwidth}
 　加工条件の設定ができればあとはNCVCの仕事．
 \menu{ファイル>ＮＣデータへの変換>単一条件（従来互換）} をクリック．
-出力ファイル名（自動設定）と条件ファイルを指定（図\ref{fig:make.png}）し，ＯＫをクリックすれば
+出力ファイル名（自動設定）と条件ファイルを指定（図\ref{fig:make.png}）し，ＯＫをクリックすれば...
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
 \vspace*{-2zh}
@@ -157,19 +157,18 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \end{figure}
 \end{minipage}
 
-\vspace*{2zh}
-　おめでとうございます！見事Gコードが生成できました．
-図\ref{fig:make.png} で［NC生成後に開く］にチェックが入っていると，即座に結果を確認することが出来ます．
-図\ref{fig:sim.png} にGコードのシミュレーション結果を示します．
-
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{No2/fig/sim.png}
+\includegraphics[scale=0.55]{No2/fig/sample01.png}
 \caption{Gコードシミュレーション画面}
-\label{fig:sim.png}
+\label{fig:sample1.png}
 \end{figure}
 
-\vspace*{2zh}
+　おめでとうございます！見事Gコードが生成できました．
+図\ref{fig:make.png} で［NC生成後に開く］にチェックが入っていると，即座に結果を確認することが出来ます．
+図\ref{fig:sample1.png} にGコードのシミュレーション結果を示します．
+
+\vspace*{3zh}
 \begin{itembox}[l]{ここまでの【まとめ】}
 (1) CADでの操作
 \begin{itemize}
@@ -185,9 +184,10 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \end{itemize}
 \end{itembox}
 
+\newpage
 \subsection{加工条件の設定2}
 
-　ところで図\ref{fig:sim.png} の左，Gコードのリストに注目すると，
+　ところで図\ref{fig:sample1.png} の左，Gコードのリストに注目すると，
 G54ワーク座標系選択やMコードなど，CADでの作図データ以外のコードが生成されています．
 これらの設定は加工条件（図\ref{fig:init.nci.png}）のヘッダー・フッターの両カスタムファイルによるものです．
 以下のリスト，標準で用意されているカスタムファイルで，左がヘッダー，右がフッターです．
@@ -214,6 +214,7 @@ M30
 \end{lstlisting}
 \end{minipage}
 
+\vspace*{2zh}
 　テキストファイルなのでメモ帳などで編集できます．
 例えばワイヤー加工機のワイヤー設定，レーザー加工機の出力設定など，ヘッダー・フッターファイルで指定しなければならない設定は多々あると思います．
 実際の運用では，加工条件ファイルを含め，対象となる工作機械ごとに設定ファイルを用意する方が良いでしょう．
@@ -235,7 +236,7 @@ M30
 \subsubsection{加工時間の表示}
 
 \begin{minipage}[t]{0.5\textwidth}
-　図\ref{fig:sim.png} の左上に注目して下さい．
+　図\ref{fig:sample1.png} の左上に注目して下さい．
 ［トータル加工時間］が表示されていますが，初期設定の段階では表示されません．
 G01～G03（直線補間や円弧補間）等の加工時間はFパラメータとその移動距離から算出できますが，
 G00早送りの移動速度は工作機械固有のパラメータです．
@@ -300,8 +301,8 @@ G00早送りの移動速度は工作機械固有のパラメータです．
 \label{fig:sample2.pdf}
 \end{figure}
 
-　図\ref{fig:NCVCsetup.png}（p.\pageref{fig:NCVCsetup.png}）の読み込みレイヤ設定と違うのは，［原点データがないとき］の選択肢．
-これをエラー以外に設定しておけば，NCVCがXY原点を補間します（図\ref{fig:NCVCsetup2.png}）．
+　図\ref{fig:ReadSetup.png}（p.\pageref{fig:ReadSetup.png}）の読み込みレイヤ設定と違うのは，［原点データがないとき］の選択肢．
+これをエラー以外に設定しておけば，NCVCがXY原点を補間します（図\ref{fig:ReadSetup2.png}）．
 
 　ただし，補間はCADデータの最大占有領域から算出されますので，意図しない位置に原点が補間される場合があります．
 特別な場合を除き【\ref{DesignCAD} CADでの作図】の通り原点情報を作図することを推奨します．
@@ -313,12 +314,19 @@ G00早送りの移動速度は工作機械固有のパラメータです．
 従来，穴加工の入力源は点データでしたが，イメージがつかみにくい，点データをDXFに吐けないCADがある等の理由から，
 円データでの穴加工が拡張設定となっています．
 
+\vspace*{2zh}
+　加工条件が設定できればあとは【\ref{sec:MakeGcode} Ｇコードの生成】通りです．
+図\ref{fig:sample2.png} にシミュレーション結果を示します．
+加工条件の［グルーピング順序］を［降順］にすることで半径の大きい中央から固定サイクル命令が生成されています．
+また，［大きさごとにコメントを埋め込む］にチェックを入ることで，それぞれの半径ごとにNCVCがコメントを埋め込みますので，
+手作業での修正，例えば工具交換命令を埋め込む等，編集の目安となります．
+
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{No2/fig/NCVCsetup2.png}
+\includegraphics[scale=0.7]{No2/fig/ReadSetup2.png}
 \caption{読み込みレイヤ設定2}
-\label{fig:NCVCsetup2.png}
+\label{fig:ReadSetup2.png}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
@@ -330,16 +338,9 @@ G00早送りの移動速度は工作機械固有のパラメータです．
 \end{figure}
 \end{minipage}
 
-\vspace*{2zh}
-　加工条件が設定できればあとは【\ref{sec:MakeGcode} Ｇコードの生成】通りです．
-図\ref{fig:simhole.png} にシミュレーション結果を示します．
-加工条件の［グルーピング順序］を［降順］にすることで半径の大きい中央から固定サイクル命令が生成されています．
-また，［大きさごとにコメントを埋め込む］にチェックを入ることで，それぞれの半径ごとにNCVCがコメントを埋め込みますので，
-手作業での修正，例えば工具交換命令を埋め込む等，編集の目安となります．
-
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{No2/fig/simuhole.png}
+\includegraphics[scale=0.55]{No2/fig/sample02.png}
 \caption{穴加工のシミュレーション画面}
-\label{fig:simhole.png}
+\label{fig:sample2.png}
 \end{figure}
