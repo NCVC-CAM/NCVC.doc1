@@ -135,3 +135,48 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \label{fig:XZ-crop.pdf}
 \end{figure}
 \end{minipage}
+
+\subsection{Gコードの生成}
+
+\begin{minipage}[t]{0.5\textwidth}
+　加工条件の設定ができればあとはNCVCの仕事．
+\menu{ファイル>ＮＣデータへの変換>単一条件（従来互換）} をクリック．
+出力ファイル名（自動設定）と条件ファイルを指定（図\ref{fig:make.png}）し，ＯＫをクリックすれば
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No1/fig/make.png}
+\caption{Gコードの出力と条件ファイルの指示}
+\label{fig:make.png}
+\end{figure}
+\end{minipage}
+
+\vspace*{2zh}
+　おめでとうございます！見事Gコードが生成できました．
+図\ref{fig:make.png} で［NC生成後に開く］にチェックが入っていると，即座に結果を確認することが出来ます．
+図\ref{fig:sim.png} にGコードのシミュレーション結果を示します．
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{No1/fig/sim.png}
+\caption{Gコードシミュレーション画面}
+\label{fig:sim.png}
+\end{figure}
+
+\vspace*{2zh}
+\begin{itembox}[l]{ここまでの【まとめ】}
+(1) CADでの操作
+\begin{itemize}
+\item 工作機械のXY原点を示す円を原点レイヤに作図
+\item 刃物の軌跡を切削レイヤに作図
+\item 原点レイヤと切削レイヤに名前を付ける
+\item 線種・線色は無視され，NCVCの表示属性により表示される
+\end{itemize}
+(2) NCVCでの操作
+\begin{itemize}
+\item CADデータを読み込むために，読み込みレイヤの設定を行う
+\item Z軸の原点や切り込み量は加工条件で設定する
+\end{itemize}
+\end{itembox}
