@@ -180,3 +180,48 @@ Z軸の初期位置（原点）で移動してもかまわないのですが，�
 \item Z軸の原点や切り込み量は加工条件で設定する
 \end{itemize}
 \end{itembox}
+
+\subsection{加工条件の設定2}
+
+　ところで図\ref{fig:sim.png} の左，Gコードのリストに注目すると，
+G54ワーク座標系選択やMコードなど，CADでの作図データ以外のコードが生成されています．
+これらの設定は加工条件（図\ref{fig:init.nci.png}）のヘッダー・フッターの両カスタムファイルによるものです．
+以下のリスト，標準で用意されているカスタムファイルで，左がヘッダー，右がフッターです．
+それぞれ生成開始時と終了時に参照され，生成するGコードに併合されます．
+使用できる置換キーワードなど詳細は第５章の【リファレンス】で解説します．
+
+\begin{minipage}[t]{0.75\textwidth}
+\begin{lstlisting}[caption=Header.txt,numbers=none,label=lst:header.txt]
+%
+({MakeDate} {MakeTime})
+({MakeUser} MADE {MakeNCD} FROM {MakeDXF} AND {MakeCondition})
+{G90orG91}G54{G92_Initial}
+M8
+{Spindle}M3
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.25\textwidth}
+\begin{lstlisting}[caption=Footer.txt,numbers=none,label=lst:footer.txt]
+M9
+M5
+{G0XY_Initial}
+M30
+%
+\end{lstlisting}
+\end{minipage}
+
+　テキストファイルなのでメモ帳などで編集できます．
+例えばワイヤー加工機のワイヤー設定，レーザー加工機の出力設定など，ヘッダー・フッターファイルで指定しなければならない設定は多々あると思います．
+実際の運用では，加工条件ファイルを含め，対象となる工作機械ごとに設定ファイルを用意する方が良いでしょう．
+本解説書では標準ヘッダーにチップコンベア起動の``\,M68\,''を挿入しています．
+他，そのまま使っても問題無いと思いますが，見づらいようならコメント行（ヘッダーの2～3行目）は削除してもかまいません．
+
+　生成時に図\ref{fig:error.png} のようなエラーメッセージが出る場合があります．
+特に標準のインストールパス以外にインストールされた場合，両カスタムファイルが探せませんので，加工条件にて正しいパスを設定して下さい．
+
+\begin{figure}[H]
+\centering
+\includegraphics{No1/fig/error.png}
+\caption{カスタムファイルのエラーメッセージ}
+\label{fig:error.png}
+\end{figure}
