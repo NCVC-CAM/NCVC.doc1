@@ -75,3 +75,62 @@ CADでの作図で原点・切削の両レイヤとは別のレイヤを用意�
 \caption{アプローチ線を追加したＧコードシミュレーション画面}
 \label{fig:sample3-1.png}
 \end{figure}
+
+\subsubsection{強制移動指示レイヤ}
+　図\ref{fig:sample3-1.png} のシミュレーション結果を見ても解る通り，原点へ戻るときもワークと干渉してしまう可能性があります．
+加工開始位置指示レイヤは，最初の加工位置やアプローチを指示するものでしたが，
+強制移動指示レイヤは，次の切削データの検索途中でNCVCに移動を指示する情報となります．
+つまり，次の切削領域への移動，Z軸の上下が必要なときに強制移動指示レイヤが参照されます．
+
+\begin{minipage}[t]{0.5\textwidth}
+　強制移動指示レイヤは線データのみを認識します．
+図\ref{fig:ReadSetup3.png} で設定した移動レイヤに作図して下さい．
+また，必ず切削データと接続されていなければなりません．
+図\ref{fig:move.pdf} は切削が終わったあとの移動軌跡を作図したものです．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics{No3/fig/move-crop.pdf}
+\caption{強制移動指示レイヤを追加}
+\label{fig:move.pdf}
+\end{figure}
+\end{minipage}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{No3/fig/sample3-2.png}
+\caption{強制移動データを追加したＧコードシミュレーション画面}
+\label{fig:sample3-2.png}
+\end{figure}
+
+\begin{minipage}[t]{0.5\textwidth}
+　図\ref{fig:sample3-2.png} のシミュレーション結果から，強制移動指示レイヤがR点で移動していることが解ります．
+この設定は加工条件の［レイヤ］タブにあります．
+今回の例では［イニシャル点復帰］が正解ですが，強制移動指示レイヤは大抵の場合，次の切削領域への移動制御に使われるため，
+通常は［R点復帰］で問題無いと思います．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/move-setup.png}
+\caption{強制移動指示レイヤのＺ値設定}
+\label{fig:move-setup.png}
+\end{figure}
+\end{minipage}
+
+\begin{itembox}[l]{ここまでの【まとめ】}
+(1) 加工開始位置指示レイヤ
+\begin{itemize}
+\item 加工開始位置を円で示す，またはアプローチ線を作図
+\item 円や線は切削データと繋がって無くても良い
+\end{itemize}
+(2) 強制移動指示レイヤ
+\begin{itemize}
+\item 切削データが途切れ，次の切削領域へ移動するとき，参照される
+\item 切削データと繋がっていなければならない
+\item 強制移動指示レイヤのＺ値は加工条件の設定による
+\end{itemize}
+\end{itembox}
