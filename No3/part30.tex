@@ -3,6 +3,7 @@
 \mysection{中級編}
 
 \subsection{移動レイヤ}
+\label{sec:move}
 　NCVCには，原点レイヤ・切削レイヤの他にあと3つのレイヤ情報を読み込む機能があります．
 ここではそのうちの2つ，加工開始位置指示レイヤと強制移動指示レイヤを解説します．
 
@@ -43,7 +44,7 @@ CADでの作図で原点・切削の両レイヤとは別のレイヤを用意�
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{No3/fig/sample3.png}
-\caption{加工開始位置を追加したＧコードシミュレーション画面}
+\caption{加工開始位置を追加したGコードシミュレーション画面}
 \label{fig:sample3.png}
 \end{figure}
 
@@ -72,7 +73,7 @@ CADでの作図で原点・切削の両レイヤとは別のレイヤを用意�
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{No3/fig/sample3-1.png}
-\caption{アプローチ線を追加したＧコードシミュレーション画面}
+\caption{アプローチ線を追加したGコードシミュレーション画面}
 \label{fig:sample3-1.png}
 \end{figure}
 
@@ -101,7 +102,7 @@ CADでの作図で原点・切削の両レイヤとは別のレイヤを用意�
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{No3/fig/sample3-2.png}
-\caption{強制移動データを追加したＧコードシミュレーション画面}
+\caption{強制移動データを追加したGコードシミュレーション画面}
 \label{fig:sample3-2.png}
 \end{figure}
 
@@ -134,3 +135,82 @@ CADでの作図で原点・切削の両レイヤとは別のレイヤを用意�
 \item 強制移動指示レイヤのＺ値は加工条件の設定による
 \end{itemize}
 \end{itembox}
+
+\subsection{Gコード（文字）の埋め込み}
+　NCVCで生成されるGコードは，基本的に位置決めと直線・円弧補間のG00～G03，固定サイクルG81～の一部だけです．
+ここでは工作機械の特殊コード（例えばATCによるツール交換コード）やカスタムマクロ呼び出しコードなど，
+生成されるGコードに任意の文字列を埋め込む方法を解説します．
+
+\begin{minipage}[t]{0.5\textwidth}
+　作図方法は至極簡単．図\ref{fig:moji.pdf} に示すように，埋め込みたいオブジェクト（線や円弧）の端点に文字を作図するだけです．
+文字データは原点レイヤ以外，すなわち，切削レイヤと２つの移動レイヤ，
+それから【\ref{sec:move} 移動レイヤ】の節で解説した最後のレイヤである［コメント文字列挿入用レイヤ］（p.\pageref{fig:ReadSetup3.png} 図\ref{fig:ReadSetup3.png}）に作図することができます．
+
+　埋め込みタイミングは，文字専用レイヤである［コメント文字列挿入用レイヤ］が先に参照され，次に各レイヤタイプに属する文字データが参照されます．
+［コメント文字列挿入用レイヤ］に書かれた文字はその名の通りGコードに対するコメントと見なされ，カッコで括られます．その他のレイヤに書かれた文字はそのまま出力されます．
+なお，文字データは1行で作図する必要がありますが，複数行の任意Gコードを埋め込みたい場合は改行位置で ``\,\textbackslash n\,'' と入力して下さい．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-1zh}
+\begin{figure}[H]
+\centering
+\includegraphics{No3/fig/moji-crop.pdf}
+\caption{文字埋め込みサンプル}
+\label{fig:moji.pdf}
+\end{figure}
+\end{minipage}
+
+　図\ref{fig:moji.pdf} の作図から生成されるGコードは以下の通りです．
+反転部分が文字情報から拾われたデータです．
+作図は簡単ですが，文字を埋め込むレイヤと場所（タイミング）には若干知恵を絞る必要があります．
+
+%\begin{multicols}{2}
+%\begin{screen}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{lstlisting}[numbers=none,label=lst:moji.txt]
+%
+G90G54G92X0Y0Z10.
+M8
+M68
+S3000M3
+T02
+G00X10.Y25.
+G65P1000A10
+X25.Y0
+G91G28Z0
+M06
+G90G54T03
+Z1.
+G01Z-2.F100
+　右へ続く
+\end{lstlisting}
+%\columnbreak
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{lstlisting}[numbers=none]
+Y50.F300
+G91G28Z0
+M06
+G90G54T01
+G00Z1.
+X40.Y25.
+G65P1001A10
+Z10.
+M9
+M5
+X0Y0
+M30
+%
+\end{lstlisting}
+\end{minipage}
+%\end{screen}
+%\end{multicols}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{No3/fig/sample4.png}
+\caption{Gコードシミュレーション画面}
+\label{fig:sample4.png}
+\end{figure}
+
+\subsection{深彫切削（Z軸ステップ切削）}
