@@ -211,3 +211,43 @@ M30\\[-0.5zh]
 \end{figure}
 
 \subsection{深彫切削（Z軸ステップ切削）}
+　ここでは［深彫切削］を解説します．
+細い刃物での切削で1回の切り込み量に制限がある場合等，Z軸を段階的に下げて切削するコードを生成することができます．
+
+\begin{minipage}[t]{0.5\textwidth}
+　深彫切削は加工条件で指示します．
+サンプルデータは【\ref{DesignCAD} CADでの作図】を使いましょう．
+同じく【\ref{sec:init.nci} 加工条件の設定】の要領で条件ファイルを開き，
+［深彫］のタブをクリックして下さい（図\ref{fig:deep.png}）．
+
+　ポイントは2点．
+まず［基本切り込み］の値ですが，ここでは ``\,1回目の切り込み量\,'' と解釈して下さい．
+これは基本タブから参照されている値です．
+このタブで値の変更はできません．
+
+　次に深彫切削グループ一連の設定．
+［最終切り込み］で最終的に必要な深さ，［切り込みステップ］にて刃物が一度に切り込む量を指定します．
+とりあえずこの設定情報でGコードを生成してみると，図\ref{fig:deep.png} のようになります．
+
+　その他の加工条件で代表的なもの［手順］は連続線．
+グループを先に彫り進める（一筆）か，同一Z値で全体を彫り進める（全体）かの設定．
+［方向］は次のZ値を切削するときにそのまま戻る（往復）か，一旦最初の加工座標まで戻る（一方）かの設定です．
+いずれもシミュレーション画面で明確に出ますので，状況に応じて設定して下さい．
+残りの設定は【リファレンス】で解説します．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/deep-setup.png}
+\caption{深彫の設定}
+\label{fig:deep-setup.png}
+\end{figure}
+\end{minipage}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{No3/fig/deep.png}
+\caption{深彫のシミュレーション結果}
+\label{fig:deep.png}
+\end{figure}
