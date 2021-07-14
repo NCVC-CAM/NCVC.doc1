@@ -1,9 +1,10 @@
 %!TEX root = ../NCVC.tex
 
 \mysection{基本編}
+\label{sec:basic}
 
 \subsection{CADでの作図}
-\label{DesignCAD}
+\label{sec:DesignCAD}
 
 \begin{minipage}[t]{0.4\textwidth}
 　まずは基本的な加工を行うための基本的な作図方法を解説します．
@@ -305,7 +306,7 @@ G00早送りの移動速度は工作機械固有のパラメータです．
 これをエラー以外に設定しておけば，NCVCがXY原点を補間します（図\ref{fig:ReadSetup2.png}）．
 
 　ただし，補間はCADデータの最大占有領域から算出されますので，意図しない位置に原点が補間される場合があります．
-特別な場合を除き【\ref{DesignCAD} CADでの作図】の通り原点情報を作図することを推奨します．
+特別な場合を除き【\ref{sec:DesignCAD} CADでの作図】の通り原点情報を作図することを推奨します．
 
 　穴加工に関する加工条件は【\ref{sec:init.nci} 加工条件の設定】で解説した条件ファイルの［穴加工］タブにて行います（図\ref{fig:hole.png}）．
 主軸回転数や切削送りなど，穴加工独自に指定可能です．

@@ -216,7 +216,7 @@ M30\\[-0.5zh]
 
 \begin{minipage}[t]{0.5\textwidth}
 　深彫切削は加工条件で指示します．
-サンプルデータは【\ref{DesignCAD} CADでの作図】を使いましょう．
+サンプルデータは【\ref{sec:DesignCAD} CADでの作図】を使いましょう．
 同じく【\ref{sec:init.nci} 加工条件の設定】の要領で条件ファイルを開き，
 ［深彫］のタブをクリックして下さい（図\ref{fig:deep.png}）．
 
@@ -229,8 +229,8 @@ M30\\[-0.5zh]
 ［最終切り込み］で最終的に必要な深さ，［切り込みステップ］にて刃物が一度に切り込む量を指定します．
 とりあえずこの設定情報でGコードを生成してみると，図\ref{fig:deep.png} のようになります．
 
-　その他の加工条件で代表的なもの［手順］は連続線．
-グループを先に彫り進める（一筆）か，同一Z値で全体を彫り進める（全体）かの設定．
+　その他の加工条件で代表的なもの．
+［手順］は連続線グループを先に彫り進める（一筆）か，同一Z値で全体を彫り進める（全体）かの設定．
 ［方向］は次のZ値を切削するときにそのまま戻る（往復）か，一旦最初の加工座標まで戻る（一方）かの設定です．
 いずれもシミュレーション画面で明確に出ますので，状況に応じて設定して下さい．
 残りの設定は【リファレンス】で解説します．
@@ -250,4 +250,113 @@ M30\\[-0.5zh]
 \includegraphics[scale=0.55]{No3/fig/deep.png}
 \caption{深彫のシミュレーション結果}
 \label{fig:deep.png}
+\end{figure}
+
+\newpage
+\subsection{複数レイヤ処理（2.5D切削）}
+　これまで2次元CADで作図したデータと加工条件に示すZ値から2次元の加工データを生成してきました．
+1つの切削レイヤに1つのZ値（加工条件）を対応させていたわけです．
+ここでは，複数の切削レイヤを処理しそれぞれにZ値を割り当てることで，簡易2.5Dの切削データを生成する方法を解説します．
+
+\subsubsection{レイヤごとのZ座標指定}
+
+\begin{minipage}[t]{0.5\textwidth}
+　図\ref{fig:25d.pdf} は一見して解りづらい図面ですが，上がXY平面図，下が側面図と考えて下さい．
+側面図の半円が切削したい曲線ですが，これをXY平面におこすため，一定間隔(この例では1mm)で補助線を引き，さらに半円との交点でXY平面用に縦の補助線を引いています．
+XY平面図では側面図からの補助線と工具径を考慮しながら切削パスを作図しています．
+ただし，それぞれの切削パスがどのZ座標かを示すため，図\ref{fig:25d.png} のように複数\footnotemark[1]
+の切削レイヤに作図しています．
+高さ30mmを1mm間隔で分割．徐々に外側へ広がっている様子が解ると思います．
+
+　作図が終われば，各レイヤに名前を割り当てましょう．
+特に切削レイヤには，それぞれが識別できるよう連番を振ります．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{No3/fig/25d-crop.pdf}
+\caption{複数レイヤのサンプル図形}
+\label{fig:25d.pdf}
+\end{figure}
+\end{minipage}
+\footnotetext[1]{Jw\_cadは1レイヤグループ16個のレイヤが割り当てられているので2つのレイヤグループを使用．30個の切削レイヤと原点・補助線レイヤで計32個のレイヤを使用しています．}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/25d-1.png}\\[2zh]
+\includegraphics[scale=0.7]{No3/fig/25d-2.png}
+\caption{複数レイヤのレイヤ一覧}
+\label{fig:25d.png}
+\end{figure}
+
+\begin{minipage}[t]{0.5\textwidth}
+　次にこの作図データをNCVCに読み込ませるわけですが，図\ref{fig:ReadSetup.png} 読み込みレイヤ設定では単一の切削レイヤしか処理できません．
+複数の切削レイヤを処理するには，図\ref{fig:25d-setup.png} のように正規表現\footnotemark[2]で認識文字列パターンを入力するか，
+従来互換を選択し，「レイヤ名``\,CAM\,''を``\,部分一致\,''で``\,認識\,''する」と指定して下さい．
+図\ref{fig:25d-setup.png} の入力例は「文字列``\,CAM\,''に続く数値(0～9)を認識」と解釈されます．
+
+　読み込みレイヤが設定できれば，NCVCでCADデータを開きます．
+図\ref{fig:25d-read.png} は\menu{表示>レイヤ}をクリックし，複数レイヤが読み込まれていることを確認しています．
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/25d-setup.png}
+\caption{複数レイヤの読み込み設定}
+\label{fig:25d-setup.png}
+\end{figure}
+\end{minipage}
+\footnotetext[2]{［XXで始まる文字列］や［YYで終わる文字列］など，文字列のパターンマッチングを表現，コンピュータに指示するための表記のこと．
+NCVCに限った話ではない．正規表現の解説はそれだけで１冊の本ができるほど様々な表記法があるので，覚える必要はない．}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{No3/fig/25d-read.png}
+\caption{複数レイヤの読み込み}
+\label{fig:25d-read.png}
+\end{figure}
+
+　複数の切削レイヤにZ値を割り当てるには，\menu{ファイル>NCデータへの変換>レイヤごとのZ座標指定}
+\footnote{複数の切削レイヤが読み込まれていないとこのメニューは選択できません}
+をクリックし，図\ref{fig:25d-make1.png} のダイアログから行います．
+NCデータの出力ファイル名と条件ファイルの指定は \ref{sec:basic}章と同じ．
+［レイヤ名とZ座標との関係］は次に説明する設定を保存するファイル（nclファイル）です．
+ここの編集ボタンをクリックすると図\ref{fig:25d-make2.png} のダイアログが表示されます．
+
+　レイヤ名には読み込んだ切削レイヤの一覧が列挙されます．
+［切り込みの自動設定］に［これ以降 ``\,-1\,''mmごとに］と入力し設定ボタンを押すと，CAM00～CAM29まで順に-1mmづつZ座標を設定できます．
+この値は加工条件の切り込み
+\footnote{【\ref{sec:init.nci} 加工条件の設定】を参照}
+に置き換えられます．
+
+　OKを押すと図\ref{fig:25d-make1.png} に戻ります．
+図\ref{fig:25d-make2.png} で設定したZ値を保存しておきたい場合は，［レイヤ名とZ座標との関係］のファイル覧に適当な名前（フルパス名）を入力します．
+
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{No3/fig/25d-make1.png}
+\caption{複数レイヤの設定}
+\label{fig:25d-make1.png}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/25d-make2.png}
+\caption{複数レイヤのZ値設定}
+\label{fig:25d-make2.png}
+\end{figure}
+\end{minipage}
+
+\vspace*{2zh}
+　全ての設定が完了し図\ref{fig:25d-make1.png} でOKボタンを押すと，図\ref{fig:25d.png} の通り簡易2.5Dの切削データが生成できました．
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.55]{No3/fig/25d.png}
+\caption{複数レイヤによる簡易2.5Dシミュレーション画面}
+\label{fig:25d.png}
 \end{figure}
