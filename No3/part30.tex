@@ -259,12 +259,13 @@ M30\\[-0.5zh]
 ここでは，複数の切削レイヤを処理しそれぞれにZ値を割り当てることで，簡易2.5Dの切削データを生成する方法を解説します．
 
 \subsubsection{レイヤごとのZ座標指定}
+\label{sec:layer-z}
 
 \begin{minipage}[t]{0.5\textwidth}
 　図\ref{fig:25d.pdf} は一見して解りづらい図面ですが，上がXY平面図，下が側面図と考えて下さい．
 側面図の半円が切削したい曲線ですが，これをXY平面におこすため，一定間隔(この例では1mm)で補助線を引き，さらに半円との交点でXY平面用に縦の補助線を引いています．
 XY平面図では側面図からの補助線と工具径を考慮しながら切削パスを作図しています．
-ただし，それぞれの切削パスがどのZ座標かを示すため，図\ref{fig:25d.png} のように複数\footnotemark[1]
+ただし，それぞれの切削パスがどのZ座標かを示すため，図\ref{fig:25d-layer.png} のように複数\footnotemark[1]
 の切削レイヤに作図しています．
 高さ30mmを1mm間隔で分割．徐々に外側へ広がっている様子が解ると思います．
 
@@ -287,7 +288,7 @@ XY平面図では側面図からの補助線と工具径を考慮しながら切
 \includegraphics[scale=0.7]{No3/fig/25d-1.png}\\[2zh]
 \includegraphics[scale=0.7]{No3/fig/25d-2.png}
 \caption{複数レイヤのレイヤ一覧}
-\label{fig:25d.png}
+\label{fig:25d-layer.png}
 \end{figure}
 
 \begin{minipage}[t]{0.5\textwidth}
@@ -359,4 +360,55 @@ NCデータの出力ファイル名と条件ファイルの指定は \ref{sec:ba
 \includegraphics[scale=0.55]{No3/fig/25d.png}
 \caption{複数レイヤによる簡易2.5Dシミュレーション画面}
 \label{fig:25d.png}
+\end{figure}
+
+\subsubsection{レイヤごとの切削条件}
+
+\begin{minipage}[t]{0.49\textwidth}
+　【\ref{sec:layer-z} レイヤごとのZ座標指定】では，その名の通り複数の切削レイヤにZ値だけを強制的に設定しました．
+加工条件は１つだけなので，主軸回転数や送り速度等は全て同じです．
+これらをもレイヤごとに設定したい，例えば図\ref{fig:shima-img.png} のような島加工で外側と内側の切削条件を変えたい場合，
+［レイヤごとの複数条件］を使います．
+\end{minipage}
+\begin{minipage}[t]{0.02\textwidth}
+　
+\end{minipage}
+\begin{minipage}[t]{0.49\textwidth}
+\vspace*{-2zh}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{No3/fig/shima-img.png}
+\caption{島加工切削例}
+\label{fig:shima-img.png}
+\end{figure}
+\end{minipage}
+
+\vspace*{2zh}
+　\menu{ファイル>NCデータへの変換>レイヤごとの複数条件}をクリックすると
+図\ref{fig:25d-make3.png} のダイアログが表示されます．基本的には図\ref{fig:25d-make1.png} と同じですが，
+加工条件をレイヤごとに設定するため，切削条件ファイルは明細の方に移動しています．
+前節同様［レイヤ名とZ座標との関係］の編集ボタンを押すと図\ref{fig:25d-make5.png} のダイアログが表示されるので，
+各レイヤごとに条件ファイルを割り当てます．
+
+　各レイヤごとにZ値を指定するか加工条件を指定するかだけの差で前節と同じです．
+シミュレーション画面も割愛します．
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\includegraphics[scale=0.6]{No3/fig/25d-make3.png}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\includegraphics[scale=0.6]{No3/fig/25d-make4.png}
+\end{minipage}
+\caption{複数レイヤのZ値設定}
+\label{fig:25d-make3.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{No3/fig/25d-make5.png}
+\caption{複数レイヤの加工条件割り当て}
+\label{fig:25d-make5.png}
 \end{figure}
