@@ -1,0 +1,182 @@
+%!TEX root = ../NCVC.tex
+
+\mysection{リファレンス}
+
+\subsection{メニュー}
+　NCVCは，開いたデータタイプによってメニューが切り替わります．
+何も開いていない初期メニュー，CAD系，NC系に分けて記載しました．
+それぞれのステージごとに参照して下さい．
+
+\subsubsection{初期（共通）メニュー}
+1) ファイル\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+開く & CADデータ，NCデータ（Gコード）を開きます．\\ \cline{1-1}
+アドイン & ファイル系アドインがあれば表示．以下同じ \\ \cline{1-1}
+（読み込み履歴）& 読み込み履歴が10個まで表示 \\ \cline{1-1}
+アプリケーションの終了 & NCVCの終了 \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+2) 表示\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+ツールバー & ツールバーのカスタマイズが行えます（p.\pageref{sec:toolbar}） \\
+ステータスバー & ステータスバーの表示，非表示 \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+3) オプション\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+工作機械の設定 & 工作機械情報の設定（p.\pageref{fig:kikai.png}, \pageref{sec:kikai}） \\
+工作機械情報のテキスト編集 & 工作機械の設定をダイアログではなくエディタにて行う \\ \cline{1-1}
+DXF関連の設定 & CADデータの読み込みレイヤ設定など（p.\pageref{fig:ReadSetup.png}, \pageref{fig:ReadSetup2.png}, \pageref{fig:ReadSetup3.png}, \pageref{fig:25d-setup.png}, \pageref{sec:ReadSetup}）\\ \cline{1-1}
+切削パラメータの設定 & 加工条件設定（p.\pageref{fig:init.nci.png}, \pageref{fig:hole.png}, \pageref{fig:move-setup.png}, \pageref{fig:deep-setup.png}, \pageref{sec:init.nci}） \\
+切削パラメータのテキスト編集 & 加工条件設定をエディタにて行う \\ \cline{1-1}
+表示属性 & 画面色などの設定．属性のエクスポートやインポートも可（p.\pageref{sec:gamen}） \\ \cline{1-1}
+外部アプリケーションの設定 & NCVCから呼び出す外部アプリの設定（p.\pageref{sec:app}） \\
+拡張子の設定 & NCVCが開く拡張子の設定（p.\pageref{sec:ext}） \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+4) 外部アプリ\\
+　［外部アプリケーションの設定］(p.\pageref{sec:app})で登録した順に表示される．
+上記［～のテキスト編集］は外部アプリケーションの1番目に渡されるため，1番目にはテキストエディタを登録した方が良い．\\
+
+5) ヘルプ\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+目次 & 古いバージョンのヘルプが表示されます \\ \cline{1-1}
+NCVCのバージョン情報 & \\
+アドインについて & アドインがあれば簡易ヘルプが表示されます \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{CADデータ系}
+1) ファイル\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+開く & \\
+閉じて開く & \\
+閉じる & \\ \cline{1-1}
+加工情報の保存 & CADデータをNCVC形式で保存 \\
+加工情報を名前を付けて保存 & 　本バージョンではデータ交換が主な目的 \\ \cline{1-1}
+アドイン & \\ \cline{1-1}
+NCデータへの変換 & 加工データの生成（p.\pageref{fig:make.png}, \pageref{fig:25d-make1.png}, \pageref{fig:25d-make3.png}, \pageref{fig:direction-setup}） \\ \cline{1-1}
+（読み込み履歴）&  \\ \cline{1-1}
+アプリケーションの終了 & \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+2) 編集\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+切り取り & 使用できません \\
+コピー & CADデータの描画イメージをクリップボードにコピー \\
+貼り付け & 使用できません \\ \cline{1-1}
+原点調整 & 読み込み後，数値オフセット・矩形位置で原点を移動（p.\pageref{sec:origin}） \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+3) 表示\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+ツールバー & \\
+ステータスバー & \\ \cline{1-1}
+レイヤ & 読み込んだレイヤ情報（p.\pageref{fig:25d-read.png}, \pageref{fig:direction.png}, \pageref{sec:layer}）\\ \cline{1-1}
+図形フィット & 現在のウィンドウに収まるように図形を表示 \\
+拡大 & \\
+縮小 & \\
+直前の拡大率 & \\
+上移動 & \\
+下移動 & \\
+左移動 & \\
+右移動 & \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+4) ウィンドウ\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+重ねて表示 & \\ 
+並べて表示 & \\
+アイコンの整列 & \\ \cline{1-1}
+次のウィンドウ & \\ \cline{1-1}
+閉じる & \\
+全て閉じる & \\ \cline{1-1}
+（開いているウィンドウ一覧）& \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+5) オプション\\
+6) 外部アプリ\\
+7) ヘルプ\\
+　初期メニューと同じ
+
+\newpage
+\subsubsection{NCデータ系}
+1) ファイル\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+開く & \\
+カーソル位置に読み込み & Gコードリストがアクティブのとき有効 \\
+閉じて開く & \\
+閉じる & \\ \cline{1-1}
+上書き保存 & \\
+名前を付けて保存 & \\
+DXF出力 & シミュレーション結果を各平面別にDXF出力（p.\pageref{sec:output-dxf}） \\ \cline{1-1}
+アドイン & \\ \cline{1-1}
+（読み込み履歴）&  \\ \cline{1-1}
+アプリケーションの終了 & \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+2) 編集\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+切り取り & 使用できません \\
+コピー & 現在アクティブなペイン情報をクリップボードにコピー \\
+貼り付け & 使用できません \\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+3) 表示\\ \vspace*{-2zh}
+\begin{table}[H]
+\begin{tabular}{|p{5cm}Il}
+\cline{1-1}
+ツールバー & \\
+ステータスバー & \\ \cline{1-1}
+図形フィット & \\
+全てのペインを図形フィット & 4面表示のみ有効 \\
+拡大 & \\
+縮小 & \\
+直前の拡大率 & \\
+上移動 & \\
+下移動 & \\
+左移動 & \\
+右移動 & \\ \cline{1-1}
+補助矩形 & 最大加工矩形・ワーク矩形の表示（p.\pageref{sec:maxrect}） \\ \cline{1-1}
+トレース & \\
+指定行 & Gコードリストの指定行に移動（p.\pageref{sec:jump}）\\ \wcline{1-1}
+\end{tabular}
+\end{table}
+
+4) ウィンドウ\\
+　CADデータ系と同じ\\
+
+5) オプション\\
+6) 外部アプリ\\
+7) ヘルプ\\
+　初期メニューと同じ

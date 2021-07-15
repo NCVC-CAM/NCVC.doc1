@@ -1,11 +1,11 @@
 \documentclass[dvipdfmx,a4paper]{ujarticle}
 
-\usepackage{mymacro}
 \usepackage{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage{xcolor}
 \usepackage{here} % \begin{figure}[H]
 \usepackage{ascmac} % \boxnote　ほか
+\usepackage{array}
 \usepackage{listings, jlisting}
 %\usepackage{multicol}
 %% -- \url link
@@ -13,42 +13,8 @@
 \usepackage[hyperrefcolorlinks,os=win]{menukeys}
 \usepackage{pxjahyper}
 %% --
-\lstset{language=c,
-  breaklines = true,
-  linewidth=\textwidth,
-  xleftmargin=20pt,
-  xrightmargin=20pt,
-  basicstyle={\footnotesize\ttfamily},
-  identifierstyle={\footnotesize\ttfamily},
-  commentstyle={\footnotesize\ttfamily},
-  keywordstyle={\footnotesize\ttfamily},
-  ndkeywordstyle={\footnotesize\ttfamily},
-  stringstyle={\footnotesize\ttfamily},
-  classoffset=1,
-  frame=tRBl,
-  framesep=5pt,
-  showstringspaces=false,
-  numbers=left,
-  stepnumber=1,
-  tabsize=4
-}
+\usepackage{mymacro}
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 図番号，表番号を章番号付きで
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
-\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
-\makeatletter
-\@addtoreset{equation}{section}
-\@addtoreset{figure}{section}
-\@addtoreset{table}{section}
-% listings用の設定
-\AtBeginDocument{
-  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
-  \@addtoreset{lstlisting}{section}
-}
-\makeatother
 
 \begin{document}
 
@@ -77,6 +43,10 @@
 
 \input{initial.sty}
 \input{No5/part50.tex}
+\newpage
+
+\input{initial.sty}
+\input{No6/part60.tex}
 \newpage
 
 \end{document}
