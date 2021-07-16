@@ -6,7 +6,7 @@
 \subsubsection{共通}
 
 \begin{minipage}[t]{0.58\textwidth}
-1) ツールバーの設定\\
+1) ツールバーの設定\label{sec:toolbar}\\
 　チェックの入っている所が現在表示されているツールバーです．
 カスタマイズボタンを押すと各カテゴリごとにボタンの表示・非表示が切り換えられます．
 ツールバーのカスタマイズウィンドウは一般的な Windows アプリケーションと同じなので割愛します．
@@ -24,7 +24,7 @@
 \end{minipage}
 
 \begin{minipage}[t]{0.38\textwidth}
-2) 表示属性の設定\\
+2) 表示属性の設定\label{sec:gamen}\\
 　まずCAD系・NC系共通の画面属性設定です．
 マウスホイールのどちらの向きで拡大縮小するかを設定できます．
 \end{minipage}
@@ -120,7 +120,7 @@ NCVC独自に色や線種を割り当てるため，CADでの作図線種や線�
 \end{minipage}
 
 \begin{minipage}[t]{0.38\textwidth}
-3) 外部アプリケーションの設定\\
+3) 外部アプリケーションの設定\label{sec:app}\\
 　上側がメニューリスト順，下側が詳細設定です．
 詳細設定でプログラムファイル・引数・対象ドキュメントなどを指定し，追加ボタンを押すと上記の一覧に追加されます．
 引数に指定できる置換キーワードは以下の通りです．
@@ -154,7 +154,7 @@ FileNameNoExt& 　　〃　　　　　拡張子を除くファイル名 \\ \hli
 \end{table}
 
 \begin{minipage}[t]{0.48\textwidth}
-3) 拡張子の設定\\
+3) 拡張子の設定\label{sec:ext}\\
 　CADデータの拡張子は一般的に定まっていますが，NCファイルの場合は多様です．
 しかも中身はテキストファイルなので，システム的にチェックできません．
 CAD系・NC系で開く拡張子を登録して下さい．
@@ -175,7 +175,7 @@ CAD系・NC系で開く拡張子を登録して下さい．
 \subsubsection{CADデータ系}
 
 \begin{minipage}[t]{0.58\textwidth}
-1) 原点調整\\
+1) 原点調整\label{sec:origin}\\
 　CADデータを読み込んだあとで原点を動かしたいときに使います．
 一時的に変更する場合にだけ使いましょう．
 基本的にはCADデータで修正する方をオススメします．
@@ -193,7 +193,7 @@ CAD系・NC系で開く拡張子を登録して下さい．
 \end{minipage}
 
 \begin{minipage}[t]{0.58\textwidth}
-2) レイヤ\\
+2) レイヤ\label{sec:layer}\\
 　NCVCで読み込んだレイヤ一覧をツリー形式で表示します．
 チェックが入っているレイヤが表示対象であり切削対象でもあります．
 単一レイヤのNC生成であってもレイヤが非表示の場合は対象外なのでご注意を．
@@ -214,7 +214,7 @@ CAD系・NC系で開く拡張子を登録して下さい．
 \subsubsection{NCデータ系}
 
 \begin{minipage}[t]{0.48\textwidth}
-1) DXF出力\\
+1) DXF出力\label{sec:output-dxf}\\
 　Gコードのシミュレーション結果をCADデータ（DXF）として出力することができます．
 残念ながら3次元データとして出力することはできません．
 平面単位（XY, XZ, YZ）の2次元データです．
@@ -232,7 +232,7 @@ CAD系・NC系で開く拡張子を登録して下さい．
 \end{minipage}
 
 \begin{minipage}[t]{0.48\textwidth}
-2) ワーク矩形\\
+2) ワーク矩形\label{sec:maxrect}\\
 　切削対象となるワークをシミュレーション画面に重ねて表示することができます．
 寸法と原点からのオフセットを入力して下さい．
 モードレスダイアログなので，表示しながらNCVC本体の操作が可能です．
@@ -250,7 +250,7 @@ CAD系・NC系で開く拡張子を登録して下さい．
 \end{minipage}
 
 \begin{minipage}[t]{0.58\textwidth}
-3) 指定行\\
+3) 指定行\label{sec:jump}\\
 　Gコードリストの指定された行を表示します．
 \end{minipage}
 \begin{minipage}[t]{0.02\textwidth}
