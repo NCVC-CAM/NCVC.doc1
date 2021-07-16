@@ -1,0 +1,74 @@
+%!TEX root = ../NCVC.tex
+
+\mysection{付録}
+
+\subsection{対応Gコード一覧}
+　[\,]は省略可能．``\,\textbar\,'' はどちらかを指定
+
+\begin{center}
+\begin{longtable}[H]{|p{7cm}|p{7cm}|}
+\hline
+%\multicolumn{1}{|c|}{コード} & \multicolumn{1}{c|}{意味} \\ \hline \hline \endhead
+コード & 意味 \\ \hline \hline \endhead
+G00 [X\_] [Y\_] [Z\_] & 位置決め（早送り） \\ \hline
+G01 [X\_] [Y\_] [Z\_] & 直線補間 \\ \hline
+
+G02 [X\_] [Y\_] [Z\_] [R\_] または & 円弧補間（時計回り） \\
+G02 [X\_] [Y\_] [Z\_] [I\_] [J\_] & \\ \hline
+
+G03 [X\_] [Y\_] [Z\_] [R\_] または & 円弧補間（反時計回り） \\
+G03 [X\_] [Y\_] [Z\_] [I\_] [J\_] & \\ \hline
+
+\multicolumn{2}{|l|}{G01～G03は，任意角度面取り・コーナーRにも対応　[,C\_\textbar ,R\_]} \\ \hline
+
+G04 [P\_\textbar X\_] & ドウェル$^{（*1）}$\\ \hline
+
+G17 & 平面指定 \\
+G18 & \\
+G19 & \\ \hline
+
+G52 [X\_] [Y\_] [Z\_] & ローカル座標指定 \\ \hline
+
+G54 & ワーク座標系の選択 \\
+G55 & （機械情報の設定が加算される）\\
+G56 & \\
+G57 & \\
+G58 & \\
+G59 & \\ \hline
+
+G80 & 固定サイクルキャンセル \\ \hline
+
+G98G81 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & 固定サイクル \\
+G99G81 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & \\
+G98G82 [X\_] [Y\_] [Z\_] [R\_] [P\_] [K\_\textbar L\_] & \\
+G99G82 [X\_] [Y\_] [Z\_] [R\_] [P\_] [K\_\textbar L\_] & \\
+G98G85 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & \\
+G99G85 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & \\
+G98G86 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & \\
+G99G86 [X\_] [Y\_] [Z\_] [R\_] [K\_\textbar L\_] & \\
+G98G89 [X\_] [Y\_] [Z\_] [R\_] [P\_] [K\_\textbar L\_] & \\
+G99G89 [X\_] [Y\_] [Z\_] [R\_] [P\_] [K\_\textbar L\_] & \\ \hline
+
+G90 & アブソリュート \\
+G91 & インクリメンタル \\ \hline
+
+G92 [X\_] [Y\_] [Z\_] & 座標系 \\ \hline
+
+G98 & イニシャルレベル復帰　\smash{\raisebox{-1zh}{固定サイクルと併用}} \\
+G99 & R点復帰 \\ \hline
+
+M02 & プログラム終了 \\
+M30 & \\ \hline
+
+M98 P\_[L\_] または & サブプログラム呼び出し \\
+M98 P times number & numberは4桁，残りtimesに割り当て \\ \hline
+
+M99 & サブプログラム終了 \\ \hline
+
+O\_ & プログラム番号$^{（*1）}$\\
+F\_ & 切削送り速度$^{（*1）}$ \\
+S\_ & 主軸回転数$^{（*1）}$\\ \hline
+\end{longtable}
+\end{center}
+\vspace*{-3zh}
+\hspace*{3zw}$^{（*1）}$描画に影響ありません

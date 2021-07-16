@@ -7,7 +7,7 @@
 \usepackage{ascmac} % \boxnote　ほか
 \usepackage{array}
 \usepackage{listings, jlisting}
-%\usepackage{multicol}
+\usepackage{longtable}
 %% -- \url link
 \usepackage[linkcolor=black]{hyperref}
 \usepackage[hyperrefcolorlinks,os=win]{menukeys}
@@ -22,14 +22,18 @@
 \input{./part00.tex}
 \newpage
 
-\setcounter{page}{0}
-\thispagestyle{empty}
+\setcounter{page}{1}
+\pagenumbering{roman}
 {\small \tableofcontents}
 \newpage
 
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\input{initial.sty}
 \input{No1/part10.tex}
 \newpage
 
+\input{initial.sty}
 \input{No2/part20.tex}
 \newpage
 
@@ -50,6 +54,10 @@
 \input{No6/part61.tex} \newpage
 \input{No6/part62.tex} \newpage
 \input{No6/part63.tex}
+\newpage
+
+\input{initial.sty}
+\input{No7/part70.tex}
 \newpage
 
 \end{document}
